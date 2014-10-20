@@ -5,6 +5,9 @@ defmodule Tomlex.Mixfile do
     [app: :tomlex,
      version: "0.0.1",
      elixir: "~> 1.0.0",
+     description: "A TOML parser for elixir",
+     package: package,
+     source_url: "https://github.com/zamith/tomlex",
      deps: deps]
   end
 
@@ -26,5 +29,13 @@ defmodule Tomlex.Mixfile do
   # Type `mix help deps` for more examples and options
   defp deps do
     []
+  end
+
+  defp package do
+    [
+      contributors: ["Zamith"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/zamith/tomlex"}
+    ]
   end
 end
