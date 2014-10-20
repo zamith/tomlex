@@ -5,14 +5,20 @@ defmodule Tomlex do
   end
 
   defp parse(line, result) do
-    parse_assignment(line, result)
+    line = remove_comments(line)
+    cond do
+      line =~ ~r/^.*=.*$/x ->
+        parse_assignment(line, result)
+      true ->
+        result
+    end
   end
 
   defp parse_assignment(line, result) do
     [key, value] = String.split(line, "=", trim: true, parts: 2)
     case parse_value(value) do
       {:ok, parsed_value} -> Map.put result, String.to_atom(String.strip(key)), parsed_value
-      :error -> :error
+      :error -> Map.put result, String.to_atom(String.strip(key)), unquote_string(String.strip(value))
     end
   end
 
@@ -22,5 +28,16 @@ defmodule Tomlex do
       {int, _} -> {:ok, int}
       :error -> :error
     end
+  end
+
+  defp remove_comments(line) do
+    case Regex.run(~r/(.*)#.*$/, line) do
+      [_, non_comments] -> non_comments
+      nil -> line
+    end
+  end
+
+  defp unquote_string(string) do
+    String.replace string, "\"", ""
   end
 end
