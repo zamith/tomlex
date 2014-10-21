@@ -10,6 +10,15 @@ defmodule TomlexTest do
     assert %{ pos: 42, neg: -17 } == parsed_configs
   end
 
+  test "floats" do
+    parsed_configs = Tomlex.load("""
+      pi = 3.1415
+      neg_point_oh_one = -0.01
+    """)
+
+    assert %{ pi: 3.1415, neg_point_oh_one: -0.01 } == parsed_configs
+  end
+
   test "comments" do
     parsed_configs = Tomlex.load("""
       # I am a comment. Hear me roar. Roar.

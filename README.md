@@ -40,7 +40,7 @@ end
 - [X] Comments
 - [X] Integers
 - [X] Strings
-- [ ] Floats
+- [X] Floats
 - [ ] Boolean
 - [ ] Tables
 - [ ] Nested Tables
