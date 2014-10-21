@@ -37,6 +37,7 @@ end
 
 - [X] Comments
 - [X] Integers
+- [X] Strings
 - [ ] Floats
 - [ ] Boolean
 - [ ] Tables
