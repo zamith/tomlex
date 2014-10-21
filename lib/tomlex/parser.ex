@@ -11,20 +11,14 @@ defmodule Tomlex.Parser do
     parse(rest, result)
   end
 
-  defp parse([%Line.Assignment{key: key, value: value} | rest], result) do
-    updated_result = case parse_value(value) do
-      {:ok, parsed_value} -> Map.put result, String.to_atom(String.strip(key)), parsed_value
-      :error -> Map.put result, String.to_atom(String.strip(key)), unquote_string(String.strip(value))
-    end
+  defp parse([%Line.Integer{key: key, value: value} | rest], result) do
+    updated_result = Map.put result, String.to_atom(key), String.to_integer(value)
     parse(rest, updated_result)
   end
 
-  defp parse_value(value) do
-    parsed_value = String.strip(value) |> Integer.parse
-    case parsed_value do
-      {int, _} -> {:ok, int}
-      :error -> :error
-    end
+  defp parse([%Line.Assignment{key: key, value: value} | rest], result) do
+    updated_result = Map.put result, String.to_atom(key), unquote_string(value)
+    parse(rest, updated_result)
   end
 
   defp unquote_string(string) do
