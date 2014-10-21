@@ -33,6 +33,43 @@ defmodule YourApp do
 end
 ```
 
+# Roadmap
+
+- [X] Comments
+- [X] Integers
+- [ ] Floats
+- [ ] Boolean
+- [ ] Tables
+- [ ] Nested Tables
+- [ ] Arrays
+- [ ] Array of Tables
+- [ ] Datetime
+- [ ] Error handling
+- [ ] Literal strings
+- [ ] Multi-line basic strings
+- [ ] Multi-line literal strings
+- [ ] Better string escaping support
+- [ ] UTF-8 `\uXXXX` and `\UXXXXXXXX` forms
+
+# Contributing
+
+To contribute you need to fork tomlex, compile it from source, test it, push the
+changes and open a pull request. Here's the commands to do it.
+
+```
+# Fork the repo on github
+
+git clone git@github.com:your-name/tomlex.git
+cd tomlex
+mix test
+
+# do your awesome changes, make sure the tests still run and commit them locally
+
+git push
+
+# Go to github and open a pull request
+```
+
 # License
 
 The MIT License (MIT)
