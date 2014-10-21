@@ -4,6 +4,8 @@ A TOML parser for elixir.
 
 ## Getting Started
 
+You can read all about the TOML markup language in the [official github repo](https://github.com/toml-lang/toml).
+
 ### Requirements
 
 * Elixir v1.0.0+
