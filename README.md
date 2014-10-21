@@ -20,7 +20,7 @@ defp deps do
 end
 ```
 
-After you're done, run `mix deps.get` in your shell top fetch the dependencies.
+After you're done, run `mix deps.get` in your shell to fetch the dependencies.
 
 Tomlex gets a string and parses it into an elixir `Map` using the `load`
 function.
@@ -66,7 +66,7 @@ git clone git@github.com:your-name/tomlex.git
 cd tomlex
 mix test
 
-# do your awesome changes, make sure the tests still run and commit them locally
+# Do your awesome changes, make sure the tests still run and commit them locally
 
 git push
 
