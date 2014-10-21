@@ -18,4 +18,8 @@ defmodule TomlexTest do
 
     assert %{ key: "value" } == parsed_configs
   end
+
+  test "load from a file" do
+    assert %{ key: "value" } == File.read!("test/examples/simple_assignment.toml") |> Tomlex.load
+  end
 end
