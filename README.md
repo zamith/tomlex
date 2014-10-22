@@ -1,4 +1,4 @@
-# Tomlex
+# Tomlex [![Build Status](https://travis-ci.org/zamith/tomlex.svg)](https://travis-ci.org/zamith/tomlex)
 
 A TOML parser for elixir.
 
