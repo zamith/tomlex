@@ -9,8 +9,10 @@ defmodule Tomlex.Parser do
   defp parse([], result), do: result
 
   defp parse([%Line.Table{keys: keys} | rest], result) do
-    inner_values =  parse_all_until(%Line.Table{}, rest, %{})
-    build_nested_table(keys, %{}, inner_values)
+    {inner_values, updated_rest} =  parse_all_inner_values(rest, %{})
+    nested_table = build_nested_table(keys, %{}, inner_values)
+    updated_result = Map.merge(result, nested_table)
+    parse(updated_rest, updated_result)
   end
 
   defp parse([%Line.Float{key: key, value: value} | rest], result) do
@@ -37,10 +39,10 @@ defmodule Tomlex.Parser do
     parse(rest, result)
   end
 
-  defp parse_all_until(_, [], parsed_values), do: parsed_values
-  defp parse_all_until(terminator_line, [terminator_line | _], parsed_values), do: parsed_values
-  defp parse_all_until(terminator_line, [hd | rest], parsed_values) do
-    parse_all_until(terminator_line, rest, parse([hd], parsed_values))
+  defp parse_all_inner_values([], parsed_values), do: {parsed_values, []}
+  defp parse_all_inner_values([%Line.Table{} | rest], parsed_values), do: {parsed_values, rest}
+  defp parse_all_inner_values([hd | rest], parsed_values) do
+    parse_all_inner_values(rest, parse([hd], parsed_values))
   end
 
   defp build_nested_table([], _, inner_values), do: inner_values

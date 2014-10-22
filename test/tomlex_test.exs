@@ -68,4 +68,34 @@ defmodule TomlexTest do
   test "load from a file" do
     assert %{ key: "value" } == File.read!("test/examples/simple_assignment.toml") |> Tomlex.load
   end
+
+  # Not quite there yet
+  #
+  # test "putting all together" do
+  #   data = %{
+  #     :title => "TOML Example",
+  #     :owner => %{
+  #       :name => "Tom Preston-Werner",
+  #       :organization => "GitHub",
+  #       :bio => "GitHub Cofounder & CEO\nLikes tater tots and beer.",
+  #       :dob => "1979-05-27T07:32:00Z",
+  #     },
+  #     :database => %{
+  #       :server => "192.168.1.1",
+  #       :ports => ["8001", "8001", "8002"],
+  #       :connection_max => 5000,
+  #     },
+  #     :servers => %{
+  #       :alpha => %{
+  #         :ip => "10.0.0.1",
+  #         :dc => "eqdc10",
+  #       },
+  #       :beta => %{
+  #         :ip=>"10.0.0.2",
+  #         :dc => "eqdc10",
+  #       }
+  #     }
+  #   }
+  #   assert data == File.read!("test/examples/sample.toml") |> Tomlex.load
+  # end
 end
