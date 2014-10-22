@@ -18,7 +18,7 @@ defmodule Tomlex.Line do
     cond do
       match = Regex.run(@table_regex, line) ->
         [_, table_names] = match
-        %Table{keys: String.split(table_names, ".")}
+        %Table{keys: parse_keys(table_names)}
       match = Regex.run(@float_regex, line) ->
         [_, key, value] = match
         %Float{key: String.strip(key), value: String.strip(value)}
@@ -41,5 +41,10 @@ defmodule Tomlex.Line do
       [_, non_comments] -> non_comments
       nil -> line
     end
+  end
+
+  defp parse_keys(key_string) do
+    String.split(key_string, ".")
+    |> Enum.map(&String.to_atom(&1))
   end
 end

@@ -56,6 +56,12 @@ defmodule TomlexTest do
     assert %{ servers: %{ ip: "10.0.0.1", ip2: "10.0.0.2" }} == parsed_configs
   end
 
+  test "super nested tables" do
+    parsed_configs = Tomlex.load("[x.y.z.w]")
+
+    assert %{ x: %{ y: %{ z: %{ w: %{}}}}} == parsed_configs
+  end
+
   test "comments" do
     parsed_configs = Tomlex.load("""
       # I am a comment. Hear me roar. Roar.
