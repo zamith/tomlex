@@ -20,6 +20,14 @@ defp deps do
 end
 ```
 
+Alternatively you can get the edge version.
+
+``` elixir
+defp deps do
+  [{:tomlex, git: "https://github.com/zamith/tomlex.git"}]
+end
+```
+
 After you're done, run `mix deps.get` in your shell to fetch the dependencies.
 
 Tomlex gets a string and parses it into an elixir `Map` using the `load`
