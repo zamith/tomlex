@@ -3,7 +3,7 @@ defmodule Tomlex do
   alias Tomlex.Parser
 
   def load(text) do
-    String.split(text, "\n", trim: true)
+    String.split(text, "\n")
     |> Enum.map(fn(line) -> Line.tokenize(line) end)
     |> Parser.parse
   end

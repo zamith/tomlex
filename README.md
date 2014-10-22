@@ -42,8 +42,8 @@ end
 - [X] Strings
 - [X] Floats
 - [X] Boolean
-- [ ] Tables
-- [ ] Nested Tables
+- [X] Tables
+- [X] Nested Tables
 - [ ] Arrays
 - [ ] Array of Tables
 - [ ] Datetime
