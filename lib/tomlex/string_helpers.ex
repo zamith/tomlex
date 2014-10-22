@@ -1,6 +1,6 @@
 defmodule Tomlex.StringHelpers do
   def unquote_string(string) do
-    String.replace string, "\"", ""
+    string |> Macro.unescape_string |> String.replace "\"", ""
   end
 
   def booleanize_string("true"), do: true
