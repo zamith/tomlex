@@ -43,6 +43,10 @@ defmodule YourApp do
 end
 ```
 
+### Documentation
+
+You can find more documentation [here](http://hexdocs.pm/tomlex/0.0.3/).
+
 # Roadmap
 
 - [X] Comments
