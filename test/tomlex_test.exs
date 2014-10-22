@@ -19,6 +19,15 @@ defmodule TomlexTest do
     assert %{ pi: 3.1415, neg_point_oh_one: -0.01 } == parsed_configs
   end
 
+  test "booleans" do
+    parsed_configs = Tomlex.load("""
+      true = true
+      false = false
+    """)
+
+    assert %{ true: true, false: false } == parsed_configs
+  end
+
   test "comments" do
     parsed_configs = Tomlex.load("""
       # I am a comment. Hear me roar. Roar.

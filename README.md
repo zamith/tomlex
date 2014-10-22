@@ -41,7 +41,7 @@ end
 - [X] Integers
 - [X] Strings
 - [X] Floats
-- [ ] Boolean
+- [X] Boolean
 - [ ] Tables
 - [ ] Nested Tables
 - [ ] Arrays

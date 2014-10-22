@@ -1,4 +1,5 @@
 defmodule Tomlex.Parser do
+  import Tomlex.StringHelpers
   alias Tomlex.Line
 
   def parse(lines) do
@@ -17,6 +18,11 @@ defmodule Tomlex.Parser do
     parse(rest, updated_result)
   end
 
+  defp parse([%Line.Boolean{key: key, value: value} | rest], result) do
+    updated_result = Map.put result, String.to_atom(key), booleanize_string(value)
+    parse(rest, updated_result)
+  end
+
   defp parse([%Line.Assignment{key: key, value: value} | rest], result) do
     updated_result = Map.put result, String.to_atom(key), unquote_string(value)
     parse(rest, updated_result)
@@ -24,9 +30,5 @@ defmodule Tomlex.Parser do
 
   defp parse([%Line.Text{line: line} | rest], result) do
     parse(rest, result)
-  end
-
-  defp unquote_string(string) do
-    String.replace string, "\"", ""
   end
 end
