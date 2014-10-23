@@ -57,6 +57,7 @@ You can find more documentation [here](http://hexdocs.pm/tomlex/0.0.3/).
 - [X] Tables
 - [X] Nested Tables
 - [X] Arrays
+- [X] Nested Arrays
 - [ ] Array of Tables
 - [ ] Datetime
 - [ ] Error handling
