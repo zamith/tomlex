@@ -8,18 +8,10 @@ defmodule Tomlex.StringHelpers do
   def booleanize_string(other_string), do: other_string
 
   def cast_string(string) do
-    cond do
-      match = Regex.run(~r/^(-?\d+\.\d+)$/, string) ->
-        [_, float] = match
-        String.to_float(float)
-      match = Regex.run(~r/^(-?\d+)$/, string) ->
-        [_, int] = match
-        String.to_integer(int)
-      match = Regex.run(~r/^(true|false)$/, string) ->
-        [_, bool] = match
-        booleanize_string(bool)
-      true ->
-        unquote_string(string)
+    case Integer.parse(string) do
+      {int, ""} -> int
+      {int, _} -> String.to_float(string)
+      :error -> string |> unquote_string |> booleanize_string
     end
   end
 end
