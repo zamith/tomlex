@@ -1,5 +1,6 @@
 defmodule Tomlex.Parser do
-  import Tomlex.StringHelpers
+  alias Tomlex.StringHelpers
+  alias Tomlex.ListHelpers
   alias Tomlex.Line
 
   def parse(lines) do
@@ -25,17 +26,28 @@ defmodule Tomlex.Parser do
   end
 
   defp parse([%Line.Boolean{key: key, value: value} | rest], result) do
-    updated_result = Map.put result, String.to_atom(key), booleanize_string(value)
+    updated_result = Map.put result, String.to_atom(key), StringHelpers.booleanize_string(value)
+    parse(rest, updated_result)
+  end
+
+  defp parse([%Line.Array{key: key, values: values} | rest], result) do
+    updated_result = Map.put result, String.to_atom(key), values |> Enum.map(&cast_nested_values(&1))
     parse(rest, updated_result)
   end
 
   defp parse([%Line.Assignment{key: key, value: value} | rest], result) do
-    updated_result = Map.put result, String.to_atom(key), unquote_string(value)
+    updated_result = Map.put result, String.to_atom(key), StringHelpers.unquote_string(value)
     parse(rest, updated_result)
   end
 
   defp parse([%Line.Blank{} | rest], result) do
     parse(rest, result)
+  end
+
+  defp cast_nested_values(value) do
+    ListHelpers.apply_to_nested_lists value, fn val ->
+      StringHelpers.cast_string(val)
+    end
   end
 
   defp parse_all_inner_values([], parsed_values), do: {parsed_values, []}

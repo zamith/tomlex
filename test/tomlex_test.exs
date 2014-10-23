@@ -71,6 +71,16 @@ defmodule TomlexTest do
     assert %{ key: "value" } == parsed_configs
   end
 
+  test "arrays" do
+    parsed_configs = Tomlex.load("""
+      a = [ 1, 2, 3.2 ]
+      b = [ true, "yellow", "green" ]
+      c = [ [ 1, 2 ], [3, 4, 5] ]
+    """)
+
+    assert %{ a: [1,2,3.2], b: [true, "yellow", "green"], c: [[1,2],[3,4,5]] } == parsed_configs
+  end
+
   test "load from a file" do
     assert %{ key: "value" } == File.read!("test/examples/simple_assignment.toml") |> Tomlex.load
   end
@@ -81,20 +91,21 @@ defmodule TomlexTest do
       :owner => %{
         :name => "Tom Preston-Werner",
         :organization => "GitHub",
-        :bio => "GitHub Cofounder & CEO\nLikes tater tots and beer.",
+        :bio => "GitHub Cofounder & CEO\nLikes tater tots and beer."
       },
       :database => %{
         :server => "192.168.1.1",
-        :connection_max => 5000,
+        :ports => ["8001", "8001", "8002"],
+        :connection_max => 5000
       },
       :servers => %{
         :alpha => %{
           :ip => "10.0.0.1",
-          :dc => "eqdc10",
+          :dc => "eqdc10"
         },
         :beta => %{
           :ip=>"10.0.0.2",
-          :dc => "eqdc10",
+          :dc => "eqdc10"
         }
       }
     }
