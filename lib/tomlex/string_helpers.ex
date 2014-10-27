@@ -8,8 +8,8 @@ defmodule Tomlex.StringHelpers do
   Removes quotes and escaped characters from a string.
 
   ## Examples
-      iex> Tomlex.StringHelpers.unquote_string("\"value\"\\n23")
-      "value\n23"
+      iex> Tomlex.StringHelpers.unquote_string("\\"value\\"\\\\n23")
+      "value\\n23"
   """
   @spec unquote_string(String.t) :: String.t
   def unquote_string(string) do
