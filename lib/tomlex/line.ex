@@ -2,6 +2,11 @@ defmodule Tomlex.Line do
   alias Tomlex.LineTypes
   alias Tomlex.ListParser
 
+  @moduledoc """
+  Responsible for the tokenization of line into tomlex valid line type structs.
+  """
+  @type line_type :: LineTypes
+
   @table_regex ~r/^\s*\[(.+)\]\s*$/
   @float_regex ~r/^([^=]*)=\s*(-?\d+\.\d+)\s*/
   @integer_regex ~r/^([^=]*)=\s*(-?\d+)\s*/
@@ -10,6 +15,18 @@ defmodule Tomlex.Line do
   @assignment_regex ~r/^([^=]*)=(.*)$/
   @comment_regex ~r/^(.*)#.*$/
 
+  @doc """
+  Tokenizes a string into a line type.
+
+  ## Examples
+
+      iex> Tomlex.Line.tokenize("key = 23")
+      %Tomlex.LineTypes.Integer{key: "key", value: "23"}
+
+      iex> Tomlex.Line.tokenize("[x.y.z]")
+      %Tomlex.LineTypes.Table{keys: [:x, :y, :z]}
+  """
+  @spec tokenize(String.t) :: line_type
   def tokenize(line) do
     line = remove_comments(line)
     cond do

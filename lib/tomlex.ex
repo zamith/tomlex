@@ -5,7 +5,7 @@ defmodule Tomlex do
   @doc """
   Parses a string into a map.
 
-  It tokenizes each line (separated by \n) into structs, which are then parsed
+  It tokenizes each line (separated by `\\n`) into structs, which are then parsed
   into the map structure.
   """
   @spec load(String.t) :: Map.t

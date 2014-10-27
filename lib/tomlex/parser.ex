@@ -2,6 +2,22 @@ defmodule Tomlex.Parser do
   alias Tomlex.StringHelpers
   alias Tomlex.LineTypes
 
+  @moduledoc """
+  Parses a list of tokenized TOML lines into the corresponding map.
+  """
+  @type line_type :: LineTypes
+
+  @doc """
+  Parses a list of tokenized TOML lines into the corresponding map.
+
+  ## Examples
+      iex> Tomlex.Parser.parse([%Tomlex.LineTypes.Integer{key: "key", value: "23"}])
+      %{key: 23}
+
+      iex> Tomlex.Parser.parse([%Tomlex.LineTypes.Table{keys: [:x, :y, :z]}])
+      %{x: %{y: %{z: %{}}}}
+  """
+  @spec parse([line_type]) :: Map.t
   def parse(lines) do
     parse(lines, %{})
   end
