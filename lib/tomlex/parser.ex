@@ -1,7 +1,6 @@
 defmodule Tomlex.Parser do
   alias Tomlex.StringHelpers
-  alias Tomlex.ListHelpers
-  alias Tomlex.Line
+  alias Tomlex.LineTypes
 
   def parse(lines) do
     parse(lines, %{})
@@ -9,49 +8,43 @@ defmodule Tomlex.Parser do
 
   defp parse([], result), do: result
 
-  defp parse([%Line.Table{keys: keys} | rest], result) do
+  defp parse([%LineTypes.Table{keys: keys} | rest], result) do
     { inner_values, updated_rest } =  parse_all_inner_values(rest, %{})
     updated_result = build_nested_table(result, keys, [], inner_values)
     parse(updated_rest, updated_result)
   end
 
-  defp parse([%Line.Float{key: key, value: value} | rest], result) do
+  defp parse([%LineTypes.Float{key: key, value: value} | rest], result) do
     updated_result = Map.put result, String.to_atom(key), String.to_float(value)
     parse(rest, updated_result)
   end
 
-  defp parse([%Line.Integer{key: key, value: value} | rest], result) do
+  defp parse([%LineTypes.Integer{key: key, value: value} | rest], result) do
     updated_result = Map.put result, String.to_atom(key), String.to_integer(value)
     parse(rest, updated_result)
   end
 
-  defp parse([%Line.Boolean{key: key, value: value} | rest], result) do
+  defp parse([%LineTypes.Boolean{key: key, value: value} | rest], result) do
     updated_result = Map.put result, String.to_atom(key), StringHelpers.booleanize_string(value)
     parse(rest, updated_result)
   end
 
-  defp parse([%Line.Array{key: key, values: values} | rest], result) do
-    updated_result = Map.put result, String.to_atom(key), values |> Enum.map(&cast_nested_values(&1))
+  defp parse([%LineTypes.Array{key: key, values: values} | rest], result) do
+    updated_result = Map.put result, String.to_atom(key), values
     parse(rest, updated_result)
   end
 
-  defp parse([%Line.Assignment{key: key, value: value} | rest], result) do
+  defp parse([%LineTypes.Assignment{key: key, value: value} | rest], result) do
     updated_result = Map.put result, String.to_atom(key), StringHelpers.unquote_string(value)
     parse(rest, updated_result)
   end
 
-  defp parse([%Line.Blank{} | rest], result) do
+  defp parse([%LineTypes.Blank{} | rest], result) do
     parse(rest, result)
   end
 
-  defp cast_nested_values(value) do
-    ListHelpers.apply_to_nested_lists value, fn val ->
-      StringHelpers.cast_string(val)
-    end
-  end
-
   defp parse_all_inner_values([], parsed_values), do: {parsed_values, []}
-  defp parse_all_inner_values([%Line.Table{} | _] = rest, parsed_values) do
+  defp parse_all_inner_values([%LineTypes.Table{} | _] = rest, parsed_values) do
     {parsed_values, rest}
   end
   defp parse_all_inner_values([hd | rest], parsed_values) do

@@ -75,10 +75,10 @@ defmodule TomlexTest do
     parsed_configs = Tomlex.load("""
       a = [ 1, 2, 3.2 ]
       b = [ true, "yellow", "green" ]
-      c = [ [ 1, 2 ], [3, 4, 5] ]
+      c = [ [ 1, [ 2 ] ], [3, 4, 5], 6 ]
     """)
 
-    assert %{ a: [1,2,3.2], b: [true, "yellow", "green"], c: [[1,2],[3,4,5]] } == parsed_configs
+    assert %{ a: [1,2,3.2], b: [true, "yellow", "green"], c: [[1,[2]],[3,4,5],6] } == parsed_configs
   end
 
   test "load from a file" do
