@@ -6,7 +6,7 @@ defmodule Tomlex.Line do
   @float_regex ~r/^([^=]*)=\s*(-?\d+\.\d+)\s*/
   @integer_regex ~r/^([^=]*)=\s*(-?\d+)\s*/
   @boolean_regex ~r/^([^=]*)=\s*(true|false)\s*/
-  @array_regex ~r/^([^=]*)=\s*\[(.*)\]\s*$/
+  @array_regex ~r/^([^=]*)=\s*(\[.*\])\s*$/
   @assignment_regex ~r/^([^=]*)=(.*)$/
   @comment_regex ~r/^(.*)#.*$/
 
