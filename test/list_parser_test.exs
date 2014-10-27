@@ -11,6 +11,6 @@ defmodule ListParserTest do
   end
 
   test "nested array" do
-    assert ListParser.parse("[[1, [2]], 3]") == [[1, [2]], 3]
+    assert ListParser.parse("[[1, [true]], 3.2, [1,45]]") == [[1, [true]], 3.2, [1,45]]
   end
 end
