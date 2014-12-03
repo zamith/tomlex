@@ -1,6 +1,7 @@
 defmodule Tomlex.Parser do
   alias Tomlex.StringHelpers
   alias Tomlex.LineTypes
+  alias Tomlex.TableArrayBuilder
 
   @moduledoc """
   Parses a list of tokenized TOML lines into the corresponding map.
@@ -23,6 +24,12 @@ defmodule Tomlex.Parser do
   end
 
   defp parse([], result), do: result
+
+  defp parse([%LineTypes.TableArray{keys: keys} | rest], result) do
+    { inner_values, updated_rest } =  parse_all_inner_values(rest, %{})
+    updated_result = TableArrayBuilder.build(result, keys, [], inner_values)
+    parse(updated_rest, updated_result)
+  end
 
   defp parse([%LineTypes.Table{keys: keys} | rest], result) do
     { inner_values, updated_rest } =  parse_all_inner_values(rest, %{})
@@ -61,6 +68,9 @@ defmodule Tomlex.Parser do
 
   defp parse_all_inner_values([], parsed_values), do: {parsed_values, []}
   defp parse_all_inner_values([%LineTypes.Table{} | _] = rest, parsed_values) do
+    {parsed_values, rest}
+  end
+  defp parse_all_inner_values([%LineTypes.TableArray{} | _] = rest, parsed_values) do
     {parsed_values, rest}
   end
   defp parse_all_inner_values([hd | rest], parsed_values) do

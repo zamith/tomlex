@@ -27,6 +27,10 @@ defmodule Tomlex.LineTypes do
     @moduledoc false
     defstruct keys: []
   end
+  defmodule TableArray do
+    @moduledoc false
+    defstruct keys: []
+  end
   defmodule Blank do
     @moduledoc false
     defstruct line: ""

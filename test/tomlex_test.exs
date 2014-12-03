@@ -62,6 +62,68 @@ defmodule TomlexTest do
     assert %{ x: %{ y: %{ z: %{ w: %{}}}}} == parsed_configs
   end
 
+  test "empty table array" do
+    parsed_configs = Tomlex.load("""
+      [[products]]
+    """)
+
+    assert %{ products: [ %{} ] } == parsed_configs
+  end
+
+  test "table arrays" do
+    parsed_configs = Tomlex.load("""
+      [[products]]
+      name = "Hammer"
+      sku = 738594937
+
+      [[products]]
+    """)
+
+    assert %{ products: [ %{ name: "Hammer", sku: 738594937 }, %{} ] } == parsed_configs
+  end
+
+  test "ultra mega table array" do
+    parsed_configs = Tomlex.load("""
+      [[fruit]]
+        name = "apple"
+
+      [[fruit.physical]]
+        color = "red"
+        shape = "round"
+
+      [[fruit.variety]]
+        name = "red delicious"
+
+      [[fruit.variety]]
+        name = "granny smith"
+
+      [[fruit]]
+        name = "banana"
+
+      [[fruit.variety]]
+        name = "plantain"
+    """)
+
+    assert %{
+      fruit: [ %{
+        name: "apple",
+        physical: %{
+          color: "red",
+          shape: "round"
+        },
+        variety: [%{
+          name: "red delicious"
+        }, %{
+          name: "granny smith"
+        }]
+      }, %{
+        name: "banana",
+        variety: [%{
+          name: "plantain"
+        }]
+      }]} == parsed_configs
+  end
+
   test "comments" do
     parsed_configs = Tomlex.load("""
       # I am a comment. Hear me roar. Roar.

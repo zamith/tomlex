@@ -7,6 +7,7 @@ defmodule Tomlex.Line do
   """
   @type line_type :: LineTypes
 
+  @table_array_regex ~r/^\s*\[\[(.+)\]\]\s*$/
   @table_regex ~r/^\s*\[(.+)\]\s*$/
   @float_regex ~r/^([^=]*)=\s*(-?\d+\.\d+)\s*/
   @integer_regex ~r/^([^=]*)=\s*(-?\d+)\s*/
@@ -30,6 +31,9 @@ defmodule Tomlex.Line do
   def tokenize(line) do
     line = remove_comments(line)
     cond do
+      match = Regex.run(@table_array_regex, line) ->
+        [_, table_names] = match
+        %LineTypes.TableArray{keys: parse_keys(table_names)}
       match = Regex.run(@table_regex, line) ->
         [_, table_names] = match
         %LineTypes.Table{keys: parse_keys(table_names)}
