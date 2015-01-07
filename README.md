@@ -48,7 +48,7 @@ for now, but will disallow it in the future, as per the [TOML specs](https://git
 
 ### Documentation
 
-You can find more documentation [here](http://hexdocs.pm/tomlex/0.0.3/).
+You can find more documentation [here](http://hexdocs.pm/tomlex/).
 
 # Roadmap
 
