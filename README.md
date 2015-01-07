@@ -64,6 +64,7 @@ You can find more documentation [here](http://hexdocs.pm/tomlex/0.0.3/).
 - [ ] Literal strings
 - [ ] Multi-line basic strings
 - [ ] Multi-line literal strings
+- [ ] Disallow different data types in arrays
 - [ ] Better string escaping support
 - [ ] UTF-8 `\uXXXX` and `\UXXXXXXXX` forms
 
