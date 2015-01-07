@@ -13,8 +13,8 @@ defmodule Tomlex.ListParser do
       iex> Tomlex.ListParser.parse("[1, 2, 3]")
       [1, 2, 3]
 
-      iex> Tomlex.ListParser.parse("[1,[true]]")
-      [1,[true]]
+      iex> Tomlex.ListParser.parse("[1,[2]]")
+      [1,[2]]
   """
   @spec parse(String.t) :: List.t
   def parse(list_string) do

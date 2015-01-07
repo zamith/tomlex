@@ -43,6 +43,9 @@ defmodule YourApp do
 end
 ```
 
+*Notice:* Do not use different data types in the same array. Tomlex allows it
+for now, but will disallow it in the future, as per the [TOML specs](https://github.com/toml-lang/toml#array).
+
 ### Documentation
 
 You can find more documentation [here](http://hexdocs.pm/tomlex/0.0.3/).
