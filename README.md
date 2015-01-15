@@ -1,4 +1,4 @@
-# Tomlex [![Build Status](https://travis-ci.org/zamith/tomlex.svg)](https://travis-ci.org/zamith/tomlex)[![Inline docs](http://inch-ci.org/github/zamith/tomlex.svg?branch=master)](http://inch-ci.org/github/zamith/tomlex)
+# Tomlex [![Build Status](https://travis-ci.org/zamith/tomlex.svg)](https://travis-ci.org/zamith/tomlex) [![Inline docs](http://inch-ci.org/github/zamith/tomlex.svg?branch=master)](http://inch-ci.org/github/zamith/tomlex)
 
 A TOML parser for elixir.
 
