@@ -30,7 +30,8 @@ defmodule Tomlex.Mixfile do
   defp deps do
     [
       {:earmark, "~> 0.1", only: :docs},
-      {:ex_doc, "~> 0.6", only: :docs}
+      {:ex_doc, "~> 0.6", only: :docs},
+      {:inch_ex, only: :docs}
     ]
   end
 
