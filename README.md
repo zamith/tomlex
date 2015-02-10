@@ -35,8 +35,6 @@ function.
 
 ``` elixir
 defmodule YourApp do
-  alias Tomlex
-
   def your_function do
     parsed_file = File.read!("path/to/file.toml") |> Tomlex.load
   end
