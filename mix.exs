@@ -4,7 +4,7 @@ defmodule Tomlex.Mixfile do
   def project do
     [app: :tomlex,
      version: "0.0.4",
-     elixir: "~> 1.0.0",
+     elixir: ">= 1.0.0",
      description: "A TOML parser for elixir",
      package: package,
      source_url: "https://github.com/zamith/tomlex",
