@@ -13,7 +13,7 @@ defmodule Tomlex.StringHelpers do
   """
   @spec unquote_string(String.t) :: String.t
   def unquote_string(string) do
-    string |> Macro.unescape_string |> String.replace "\"", ""
+    string |> Macro.unescape_string |> String.replace("\"", "")
   end
 
   @doc """

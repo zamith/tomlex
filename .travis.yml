@@ -1,8 +1,8 @@
 language: elixir
 elixir:
-  - 1.2.2
+  - 1.3.4
 otp_release:
-  - 18.2.1
+  - 19
 script:
   - MIX_ENV=all mix test
 after_script:

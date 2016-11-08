@@ -21,7 +21,7 @@ defmodule Tomlex.TableArrayBuilder do
     build(new_result, keys, all_keys, inner_values)
   end
 
-  defp put_in_new_list(data, [], value) do
+  defp put_in_new_list(_data, [], value) do
     value
   end
   defp put_in_new_list(data, [key | keys] = all_keys, value) do
