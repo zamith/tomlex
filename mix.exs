@@ -6,9 +6,9 @@ defmodule Tomlex.Mixfile do
      version: "0.0.4",
      elixir: ">= 1.0.0",
      description: "A TOML parser for elixir",
-     package: package,
+     package: package(),
      source_url: "https://github.com/zamith/tomlex",
-     deps: deps]
+     deps: deps()]
   end
 
   # Configuration for the OTP application

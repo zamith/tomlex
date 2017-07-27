@@ -39,19 +39,19 @@ defmodule Tomlex.Line do
         %LineTypes.Table{keys: parse_keys(table_names)}
       match = Regex.run(@float_regex, line) ->
         [_, key, value] = match
-        %LineTypes.Float{key: String.strip(key), value: String.strip(value)}
+        %LineTypes.Float{key: String.trim(key), value: String.trim(value)}
       match = Regex.run(@integer_regex, line) ->
         [_, key, value] = match
-        %LineTypes.Integer{key: String.strip(key), value: String.strip(value)}
+        %LineTypes.Integer{key: String.trim(key), value: String.trim(value)}
       match = Regex.run(@boolean_regex, line) ->
         [_, key, value] = match
-        %LineTypes.Boolean{key: String.strip(key), value: String.strip(value)}
+        %LineTypes.Boolean{key: String.trim(key), value: String.trim(value)}
       match = Regex.run(@array_regex, line) ->
         [_, key, value] = match
-        %LineTypes.Array{key: String.strip(key), values: ListParser.parse(value)}
+        %LineTypes.Array{key: String.trim(key), values: ListParser.parse(value)}
       match = Regex.run(@assignment_regex, line) ->
         [_, key, value] = match
-        %LineTypes.Assignment{key: String.strip(key), value: String.strip(value)}
+        %LineTypes.Assignment{key: String.trim(key), value: String.trim(value)}
       true ->
         %LineTypes.Blank{line: line}
     end

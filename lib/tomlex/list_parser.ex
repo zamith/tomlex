@@ -34,7 +34,7 @@ defmodule Tomlex.ListParser do
   end
   defp parse_list(list, result) do
     { value_list, updated_rest } = list |> take_and_drop_while(&(&1 != ","))
-    value = StringHelpers.cast_string(value_list |> Enum.join |> String.strip)
+    value = StringHelpers.cast_string(value_list |> Enum.join |> String.trim)
     parse_list(updated_rest, result ++ [value])
   end
 
